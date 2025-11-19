@@ -1,0 +1,136 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/f34d03b026.js" crossorigin="anonymous"></script>
+    <title>HACKATON 2025</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="{% static '/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+    <div id="programa-jovem-programador">
+
+        <header class="main-header">
+
+            <div class="top-banner"></div>
+
+            <nav class="main-nav">
+                <div class="nav-container">
+                    <div class="logo">
+                        <a href="http://127.0.0.1:8000/chat/">
+                            <img src="{% static 'jovemprogramador_logo.png' %}" alt="Logo Jovem Programador">
+                        </a>
+                    </div>
+                    <ul class="nav-links">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle">O Programa</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#video-sobre">Sobre o programa</a></li>
+                                <li><a href="#">Apoiadores</a></li>
+                                <li><a href="#">Patrocinadores</a></li>
+                                <li><a href="#">Parceiros</a></li>
+                                <li><a href="#">Dúvidas</a></li>
+                                <li><a href="#">Quero ser professor</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Hackathon</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="{% url 'cadastro_app:cadastro_pessoa' %}">Inscrição</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle"><i class="fas fa-sign-in-alt"></i> Acessar</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'accounts_app:login' %}">Área do Senac</a></li>
+                                <li><a href="https://www.jovemprogramador.com.br/aluno/">Área do Aluno</a></li>
+                                <li><a href="https://www.jovemprogramador.com.br/vagas/">Área da Empresa</a></li>
+                            </ul>
+                        </li>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </ul>
+                </div>
+            </nav>
+
+        </header>
+
+    </div>
+
+    <div class="banner_jp">
+            <img src="{% static 'jovem_social3.png' %}" alt="Banner Jovem Programador" class="banner-image">
+    </div>
+
+    <div class="video-container" id="video-sobre">
+        <video width="100%" controls poster="{% static '' %}">
+            <source src="{% static 'video_ada.mp4' %}" type="video/mp4">
+            Seu navegador não suporta o formato de vídeo.
+        </video>
+    </div>
+
+    <!-- Botão do Chat -->
+    <button class="open-chat-button" id="open-chat-button"
+        data-chat-open-icon="{% static 'avatar.png' %}"
+        data-chat-close-icon="{% static 'close.jpeg' %}">
+        <img src="{% static 'avatar.png' %}" class="chat-button-icon" id="chat-toggle-icon" alt="Ícone de Chat">
+    </button>
+
+    <!-- Botão X -->
+    <button id="close-button">×</button>
+
+    <!-- Botão Lateral -->
+    <div id="side-button"><span>Fale com a ADA</span></div>
+
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-header">
+            <img src="{% static 'avatar.png' %}" style="width: 90px; height: 90px; vertical-align: middle; margin-right: 15px;" alt="Avatar da ADA">
+            Assistente Virtual ADA
+        </div>
+        <div id="chat-box">
+            {# Mensagens do chatbot serão adicionadas aqui via JavaScript #}
+        </div>
+
+        <!-- <div class="chatbot-interesse-button-container">
+            <a href="{% url 'cadastro_app:cadastro_pessoa' %}" class="button-style">
+                Ficou interessado no curso?<br> Clique aqui </br>
+            </a>
+        </div> -->
+
+        <div class="chatbot-input-area">
+            <input type="text" id="user-input" placeholder="Digite sua mensagem..." maxlength="150">
+            <button id="send-button" onclick="sendMessage()">Enviar</button>
+            <button id="microphone-button">
+                <svg class="microphone-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="currentColor" width="20" height="20">
+                    <path d="M192 0C139 0 96 43 96 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24V256c0 97.2 78.8 176 176 176s176-78.8 176-128V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216zm192 216c-13.3 0-24 10.7-24 24v40c0 13.3 10.7 24 24 24h48c13.3 0 24-10.7 24-24V456c0-13.3-10.7-24-24-24H256z"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="char-count-container">
+            <span id="char-count">0 / 150</span>
+        </div>
+    </div>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+        <script>
+            new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+    
+</body>
+</html>

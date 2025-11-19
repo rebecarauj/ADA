@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Efetuado com Sucesso</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4A2E75;
+            margin-bottom: 20px;
+            font-size: 2.2em;
+            font-weight: 600;
+        }
+
+        p {
+            margin-top: 15px;
+            line-height: 1.6;
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        .success-icon {
+            color: #28a745; /* Verde de sucesso */
+            font-size: 4em; /* Tamanho do ícone */
+            margin-bottom: 20px;
+            display: block; /* Para centralizar */
+        }
+
+        /* Estilos para o botão "Voltar ao Site" - AGORA COM O MESMO VISUAL DO BOTÃO DE SUBMIT */
+        .back-to-site-button {
+            display: block; /* Essencial para que width: 100% funcione */
+            margin-top: 30px; /* Mais espaço do texto para o botão */
+            background-color: #7B3EBC; /* Roxo principal, igual ao botão de submit */
+            color: white;
+            padding: 14px 25px; /* Mesmo padding */
+            border: none;
+            border-radius: 8px; /* Mesma borda */
+            text-decoration: none; /* Remove sublinhado padrão de link */
+            font-size: 1.1em; /* Mesmo tamanho de fonte */
+            font-weight: 600; /* Mesmo peso da fonte */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%; /* Ocupa 100% da largura do container */
+            box-sizing: border-box; /* Inclui padding na largura total */
+            text-align: center; /* Centraliza o texto do botão */
+        }
+
+        .back-to-site-button:hover {
+            background-color: #6A34A6; /* Roxo mais escuro no hover */
+            transform: translateY(-2px); /* Efeito de elevação */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="success-icon">&#10003;</span> <h1>CADASTRADO COM SUCESSO!</h1>
+        <p>Agradecemos!<br>Entraremos em contato em breve para informar sobre as próximas etapas.</p>
+        <a href="{% url 'chatbot_app:chatbot_view' %}" class="back-to-site-button">Voltar ao Site</a>
+        </div>
+</body>
+</html>
+
+

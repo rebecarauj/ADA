@@ -1,0 +1,195 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Gerenciar Cadastros</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #6a0dad;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .dashboard-header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        .dashboard-header .user-info {
+            font-size: 1.1em;
+            display: flex; /* Para alinhar o texto e o botão */
+            align-items: center;
+            gap: 15px; /* Espaçamento entre o texto e o botão */
+        }
+
+        .new-user {
+            background-color: #2926e4;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            cursor: pointer; /* Adiciona cursor de ponteiro para indicar que é clicável */
+            transition: background-color 0.3s ease;
+        }
+        .new-user:hover {
+            background-color: #4d57eb;
+        }
+        .dashboard-header .logout-form button { /* Estilo para o botão dentro do formulário */
+            background-color: #dc3545;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            cursor: pointer; /* Adiciona cursor de ponteiro para indicar que é clicável */
+            transition: background-color 0.3s ease;
+        }
+        .dashboard-header .logout-form button:hover {
+            background-color: #c82333;
+        }
+      
+        .export-buttons {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .export-buttons a {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .export-buttons a:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #eee;
+            font-weight: bold;
+            color: #555;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .action-buttons a, .action-buttons button {
+            background-color: #dc3545; /* Red for delete */
+            color: white;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.85em;
+            transition: background-color 0.3s ease;
+        }
+        .action-buttons button:hover {
+            background-color: #c82333;
+        }
+        .action-buttons a.edit-button {
+            background-color: #007bff; /* Blue for edit */
+            margin-right: 5px;
+        }
+        .action-buttons a.edit-button:hover {
+            background-color: #0056b3;
+        }
+        .no-data-message {
+            text-align: center;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-header">
+        <h1>Dashboard de Cadastros</h1>
+        <div class="user-info">
+            Bem-vindo, {{ request.user.username }}!
+            {# O formulário de logout foi movido para aqui para garantir que seja um POST #}
+            <form action="{% url 'accounts_app:logout' %}" method="post" class="logout-form">
+                {% csrf_token %}
+                <button type="submit">Sair</button>
+            </form>
+            <a href="{% url 'accounts_app:register' %}" class="new-user">Cadastrar novo usuário</a>
+        </div>
+    </div>
+
+    <div class="export-buttons">
+        <a href="{% url 'accounts_app:export_data' %}?format=excel">Baixar Excel</a>
+        <a href="{% url 'accounts_app:export_data' %}?format=pdf">Baixar PDF</a>
+    </div>
+
+    {% if pessoas %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome Completo</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Cidade Curso</th>
+                    <th>Data Cadastro</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pessoa in pessoas %}
+                    <tr>
+                        <td>{{ pessoa.id }}</td>
+                        <td>{{ pessoa.nome }}</td>
+                        <td>{{ pessoa.email }}</td>
+                        <td>{{ pessoa.whatsapp }}</td>
+                        <td>{{ pessoa.cidade_curso }}</td>
+                        <td>{{ pessoa.data_cadastro|date:"d/m/Y H:i:s" }}</td>
+                        <td class="action-buttons">
+                            <form action="{% url 'accounts_app:delete_data' pessoa.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" onclick="return confirm('Tem certeza que deseja excluir {{ pessoa.nome }}?')">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="no-data-message">Nenhum cadastro de interesse encontrado.</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,542 @@
+/* style.css */
+
+/* Reset básico para remover margens e preenchimentos padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Transições comuns */
+.slide {
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.slide-in {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.slide-out {
+    transform: translateX(150%);
+    opacity: 0;
+}
+
+/* Botão X */
+#close-button {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    background-color: #0000004b;
+    color: rgba(255, 255, 255, 0.473);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Botão Lateral */
+#side-button {
+    position: fixed;
+    bottom: 60px;
+    right: 0;
+    background-color: #6a0dad;
+    color: white;
+    padding: 12px 10px;
+    border-radius: 8px 0 0 8px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    transform: translateX(150%);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    z-index: 1000;
+}
+
+#side-button span {
+    transform: rotate(180deg);
+    display: inline-block;
+}
+
+#side-button::before {
+    content: "🔄";
+    display: block;
+    font-size: 20px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+/* Estilos Gerais do Corpo */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #eeeef8;
+    color: #e0e0e0;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+
+/* Estilo para o botão "Cadastrar Interesse" dentro do chatbot */
+/* .chatbot-interesse-button-container {
+    padding: 15px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #4a4a6a4b;
+} */
+
+.button-style {
+    display: block;
+    margin: 0 auto;
+    background-color: #6a0dad;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: fit-content;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.button-style:hover {
+    background-color: #8a2be2;
+    transform: translateY(-2px);
+}
+
+.char-count-container {
+    text-align: right;
+    padding: 5px 15px 10px;
+    font-size: 0.85em;
+    color: #b0b0b0;
+    background-color: #6a0dad;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+/* Estilo do Botão de Abrir Chat */
+.open-chat-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #6a0dad;
+    color: white;
+    border: 3px solid #8a2be2;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+    z-index: 1000;
+    padding: 0;
+    overflow: hidden;
+}
+
+.open-chat-button:hover {
+    background-color: #8a2be2;
+    transform: scale(1.03);
+    border-color: white;
+}
+
+.chat-button-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Estilo da Janela do Chatbot */
+.chatbot-container {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 500px;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: fixed;
+    bottom: 110px;
+    right: 80px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    z-index: 1002;
+}
+
+.chatbot-container.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Cabeçalho do Chatbot */
+.chatbot-header {
+    background-color: #6a0dad;
+    color: white;
+    padding: 15px 20px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Caixa de Mensagens */
+#chat-box {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #6a0dad #3a3a5a;
+}
+
+/* Estilo da barra de rolagem para Webkit (Chrome, Safari) */
+#chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat-box::-webkit-scrollbar-track {
+    background: #3a3a5a;
+    border-radius: 10px;
+}
+
+#chat-box::-webkit-scrollbar-thumb {
+    background-color: #6a0dad;
+    border-radius: 10px;
+    border: 2px solid #3a3a5a;
+}
+
+/* Estilo das Mensagens */
+.message {
+    max-width: 80%;
+    padding: 10px 15px;
+    border-radius: 18px;
+    word-wrap: break-word;
+}
+
+.user-message {
+    background-color: #4a148c;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+}
+
+.bot-message {
+    background-color: #bfbff1;
+    color: black;
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+}
+
+/* Estilo para o loading */
+.loading-message {
+    background-color: #bfbff1;
+    color: rgba(0, 0, 0, 0.507);
+    align-self: flex-start;
+    padding: 10px 15px;
+    border-radius: 18px;
+    border-bottom-left-radius: 5px;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* Área de Input */
+.chatbot-input-area {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #4a4a6a;
+}
+
+#user-input {
+    flex-grow: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background-color: #4a148c;
+    color: white;
+    font-size: 1em;
+    outline: none;
+    margin-right: 10px;
+}
+
+#user-input::placeholder {
+    color: #b0b0b0be;
+}
+
+/* Estilo para input desabilitado */
+#user-input:disabled {
+    background-color: #4a4a6a;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+button {
+    background-color: #4a148c;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+    background-color: #8a2be2;
+    transform: translateY(-2px);
+}
+
+/* Estilo para botão desabilitado */
+button:disabled {
+    background-color: #4a4a6a;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* NOVO: Estilo para o botão de microfone */
+#microphone-button {
+    background-color: #4CAF50;
+    margin-left: 10px;
+    padding: 12px 15px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#microphone-button.recording {
+    background-color: #F44336;
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+    }
+    to {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(244, 67, 54, 0);
+    }
+}
+
+/* Ícone do microfone (usando Font Awesome ou similar, ou SVG inline) */
+.microphone-icon {
+    color: white;
+}
+
+/* Estilo para o botão de reproduzir áudio */
+.play-audio-button {
+    background-color: #bfbff1;
+    color: #4a148c;
+    border: none;
+    /* border-radius: 50%; */
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.25rem;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.play-audio-button:hover {
+    transform: translateY(-2px);
+}
+
+.message.bot-message .play-audio-button {
+    margin-top: 5px;
+}
+
+/* Container para o texto e o botão de play na mensagem do bot */
+.bot-message-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* CÓDIGO CSS para a navegação */
+/* Seção do banner rosa/roxo */
+.top-banner {
+    height: 5px;
+    width: 100%;
+    background-color: #f244ac;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+}
+
+/* Seção da navegação principal */
+.main-nav {
+    position: fixed;
+    top: 5px;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 17px 20px;
+    max-width: 1290px;
+    margin: 0 auto;
+}
+
+.logo img {
+    height: 89px;
+    margin-top: 6px
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 19px;
+}
+
+.nav-links li {
+  margin-right: 5px; /* Espaçamento entre os itens */
+}
+
+.nav-links a {
+    font-size: 1.29rem;
+    text-decoration: none;
+    color: #2e2d30; 
+    font-weight: 500;
+    position: relative; /* Essencial para posicionar a linha corretamente */
+    padding-bottom: 5px; /* Adiciona espaço para a linha */
+    transition: color 0.3s ease;
+}
+
+/* Cria a linha invisível */
+.nav-links a::after {
+    content: ''; /* O conteúdo é obrigatório, mesmo que vazio */
+    position: absolute;
+    bottom: 0; /* Posição da linha */
+    left: 50%; /* Começa no centro do link */
+    width: 0; /* Largura inicial da linha */
+    height: 2px; /* Espessura da linha */
+    background-color: #4f8294; /* Cor da linha, use a cor do logo */
+    transition: width 0.3s ease, left 0.3s ease; /* Anima a largura e a posição */
+}
+
+/* Animação no hover */
+.nav-links a:hover {
+    color: #4f8294; /* Altera a cor do texto para combinar com a linha */
+}
+
+.nav-links a:hover::after {
+    width: 100%; /* Aumenta a largura da linha para 100% */
+    left: 0; /* Move a linha para o início do link */
+}
+
+.banner_jp {
+    margin-top: 140px;
+    width: 100%;
+}
+
+.banner-image {
+    width: 100%; /* Faz a imagem ocupar 100% da largura do seu contêiner pai (.banner_jp) */
+    height: auto; /* Mantém a proporção da imagem para que ela não fique distorcida */
+    display: block; /* Remove o espaço extra abaixo da imagem que alguns navegadores adicionam */
+}
+
+/* Isso irá garantir que o contêiner do vídeo comece em uma nova linha */
+.video-container {
+    clear: both;
+    width: 70%;
+    /* Outros estilos de centralização e margem */
+    height: auto;
+    margin: 500px auto;
+}
+
+
+/* Estilo para o contêiner do menu suspenso */
+.dropdown {
+    position: relative; /* Importante para que o menu suspenso seja posicionado em relação a este item */
+    /* Isso cria uma área de segurança para que o mouse não saia */
+    padding-bottom: 20px;
+}
+
+/* Estilo para o menu suspenso (inicialmente oculto) */
+.dropdown-menu {
+    display: none; /* Esconde o menu por padrão */
+    position: absolute; /* Posição absoluta em relação ao item 'dropdown' */
+    top: 100%; /* Posição logo abaixo do link 'Acessar' */
+    left: 0;
+    list-style: none;
+    background-color: #ffffff; /* Fundo branco para os links do dropdown */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    padding: 10px 0;
+    /* Adicione um margin negativo para 'puxar' o menu para cima */
+    /* Isso o conecta visualmente ao link pai */
+    margin-top: -10px;
+}
+
+/* Estilo para os links dentro do menu suspenso */
+.dropdown-menu li {
+    margin: 0;
+}
+
+.dropdown-menu a {
+    display: block; /* Faz o link ocupar toda a largura do item da lista */
+    padding: 10px 20px;
+    white-space: nowrap; /* Evita que o texto quebre para a próxima linha */
+}
+
+/* Exibe o menu suspenso quando a classe 'active' for adicionada ao 'dropdown' */
+/* .dropdown.active .dropdown-menu {
+    display: block;
+} */
+
+/* Exibe o menu suspenso ao passar o mouse sobre o item de navegação */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}

@@ -1,0 +1,463 @@
+/* style.css */
+
+/* Reset básico para remover margens e preenchimentos padrão */
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ /* Transições comuns */
+.slide {
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.slide-in {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.slide-out {
+    transform: translateX(150%);
+    opacity: 0;
+}
+
+  /* Botão X */
+  #close-button {
+    position: fixed; /* Fixa o botão na tela */
+    bottom: 100px; /* Acima do botão de abrir chat */
+    right: 20px; /* Alinha à direita */
+    background-color: #0000004b; /* Roxo principal do botão */
+    color: rgba(255, 255, 255, 0.473); /* Cor do texto */
+    border-radius: 50%; /* Borda arredondada para o botão */
+    width: 24px; /* Largura do botão */
+    height: 24px; /* Altura do botão */
+    font-size: 24px; /* Tamanho do ícone */
+    text-align: center; /* Centraliza o texto dentro do botão */
+    display: flex; /* Usa flexbox para centralizar o conteúdo */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Sombra para dar profundidade */
+    z-index: 1000; /* Garante que o botão fique acima de outros elementos */
+    padding: 0; /* Remove o padding para que a imagem preencha o botão */
+    overflow: hidden; /* Garante que nada saia da borda arredondada */
+}
+
+  /* Botão Lateral */
+#side-button {
+    position: fixed;
+    bottom: 60px;
+    right: 0;
+    background-color: #6a0dad;
+    color: white;
+    padding: 12px 10px;
+    border-radius: 8px 0 0 8px;
+    writing-mode: vertical-rl; /* Modo de escrita vertical */
+    text-orientation: mixed; /* Permite que o texto seja lido corretamente */
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex; 
+    align-items: center;
+    gap: 5px; /* Espaço entre o texto e o ícone */
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    transform: translateX(150%); /* Começa fora da tela */
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease; /* Transição suave */
+    z-index: 1000; /* Garante que o botão fique acima de outros elementos */
+  }
+
+#side-button span {
+    transform: rotate(180deg); /* Inverte o texto para que fique legível */
+    display: inline-block; /* Necessário para aplicar a rotação corretamente */
+  }
+
+#side-button::before {
+   
+    content: "🔄";
+    display: block;
+    font-size: 20px;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+
+
+
+/* Estilo do cabeçalho */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 15px 0; /* Espaçamento interno superior e inferior */
+    width: 100%; /* Ocupa toda a largura da tela */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave para destacar */
+    background-color: #2a2a4a; /* Mesmo fundo do chatbot-container */
+    justify-content: center; /* Centraliza o botão horizontalmente */
+    align-items: center;
+    border-top: 1px solid #4a4a6a; /* Linha divisória igual à da área de input */
+}
+
+/* Estilo da navegação principal */
+.main-nav ul {
+    list-style: none; /* Remove os marcadores de lista padrão */
+    display: flex; /* Transforma a lista em um container flexível */
+    justify-content: space-around; /* Distribui os itens igualmente no espaço disponível */
+    align-items: center; /* Alinha os itens verticalmente no centro */
+    padding: 0 20px; /* Um pouco de padding nas laterais, se necessário */
+}
+
+
+/* Estilos Gerais do Corpo */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #eeeef8; /* Fundo escuro */
+    color: #e0e0e0; /* Cor do texto padrão */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ocupa a altura total da viewport */
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box; /* Inclui padding na altura */
+}
+
+
+/* Estilo para o botão "Cadastrar Interesse" dentro do chatbot */
+.chatbot-interesse-button-container {
+    padding: 15px; /* Mesmo padding da área de input */
+    background-color: #2a2a4a; /* Mesmo fundo do chatbot-container */
+    display: flex;
+    justify-content: center; /* Centraliza o botão horizontalmente */
+    align-items: center;
+    border-top: 1px solid #4a4a6a; /* Linha divisória igual à da área de input */
+}
+
+.button-style {
+    display: block; /* Essencial para que width: 100% funcione */
+    margin: 0 auto; /* Centraliza o bloco */
+    background-color: #6a0dad; /* Roxo principal, igual ao botão de submit */
+    color: white;
+    padding: 10px 15px; /* Mesmo padding */
+    border: none;
+    border-radius: 20px; /* Mesma borda */
+    text-decoration: none; /* Remove sublinhado padrão de link */
+    font-size: 1em; /* Mesmo tamanho de fonte */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: fit-content; /* Se você quiser que o botão se ajuste ao texto */
+    box-sizing: border-box; /* Inclui padding na largura total */
+    text-align: center; /* Centraliza o texto do botão */
+}
+
+.button-style:hover {
+    background-color: #8a2be2; /* Roxo mais claro no hover */
+    transform: translateY(-2px); /* Efeito de elevação */
+}
+
+.button-senac {
+    display: block; /* Essencial para que width: 100% funcione */
+    margin: 0 auto; /* Centraliza o bloco */
+    background-color: #2926e4;
+    color: white;
+    padding: 10px 15px; /* Mesmo padding */
+    border: none;
+    border-radius: 20px; /* Mesma borda */
+    text-decoration: none; /* Remove sublinhado padrão de link */
+    font-size: 1em; /* Mesmo tamanho de fonte */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: fit-content; /* Se você quiser que o botão se ajuste ao texto */
+    box-sizing: border-box; /* Inclui padding na largura total */
+    text-align: center; /* Centraliza o texto do botão */
+}
+
+.button-senac:hover {
+    background-color: #4d57eb; /* Roxo mais claro no hover */
+    transform: translateY(-2px); /* Efeito de elevação */
+}
+
+
+/* NOVO: Estilo para o container da contagem de caracteres */
+.char-count-container {
+    text-align: right; /* Alinha o texto à direita */
+    padding: 5px 15px 10px; /* Espaçamento */
+    font-size: 0.85em; /* Tamanho da fonte menor */
+    color: #b0b0b0; /* Cor mais clara */
+    background-color: #2a2a4a; /* Mesma cor de fundo do chatbot-container */
+    border-bottom-left-radius: 15px; /* Bordas arredondadas na parte inferior */
+    border-bottom-right-radius: 15px;
+}
+
+
+/* Estilo do Botão de Abrir Chat */
+.open-chat-button {
+    position: fixed; /* Fixa o botão na tela */
+    bottom: 30px;
+    right: 30px;
+    background-color: #6a0dad; /* Roxo principal do botão */
+    color: white;
+    border: 3px solid #8a2be2; /* NOVA LINHA: Borda roxa de 3px de espessura */
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease; /* Adicione border-color na transição */
+    z-index: 1000; /* Garante que o botão fique acima de outros elementos */
+    padding: 0; /* Remove o padding para que a imagem preencha o botão */
+    overflow: hidden; /* Garante que nada saia da borda arredondada */
+}
+
+.open-chat-button:hover {
+    background-color: #8a2be2;
+    transform: scale(1.03);
+    border-color: white; /* Opcional: Mudar a cor da borda ao passar o mouse para um efeito legal */
+}
+
+/* O resto do seu CSS permanece o mesmo */
+
+
+.open-chat-button:hover {
+    background-color: #8a2be2;
+    transform: scale(1.05);
+}
+
+/* NOVO ESTILO: Para a imagem dentro do botão */
+.chat-button-icon {
+    width: 100%; /* Faz a imagem preencher a largura do botão */
+    height: 100%; /* Faz a imagem preencher a altura do botão */
+    object-fit: cover; /* Garante que a imagem cubra a área, cortando se necessário */
+    border-radius: 50%; /* Mantém a imagem redonda como o botão */
+}
+
+
+/* Estilo da Janela do Chatbot */
+.chatbot-container {
+    background-color: #2a2a4a; /* Fundo mais claro que o body, para contraste */
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Sombra suave */
+    width: 100%;
+    max-width: 500px; /* Largura máxima da janela */
+    height: 70vh; /* Altura da janela (ajustável) */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Garante que nada saia da borda arredondada */
+    /* NOVOS ESTILOS PARA ESCONDER/MOSTRAR */
+    position: fixed; /* Posiciona a janela fixamente */
+    bottom: 110px; /* Acima do botão */
+    right: 80px; /* Alinha com o botão */
+    opacity: 0; /* Começa invisível */
+    visibility: hidden; /* Esconde do fluxo do documento */
+    transform: translateY(20px); /* Começa um pouco abaixo */
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    z-index: 999; /* Fica abaixo do botão mas acima do conteúdo normal */
+}
+
+.chatbot-container.active {
+    opacity: 1; /* Torna visível */
+    visibility: visible; /* Torna visível */
+    transform: translateY(0); /* Volta para a posição original */
+}
+
+/* Cabeçalho do Chatbot */
+.chatbot-header {
+    background-color: #6a0dad; /* Roxo escuro para o cabeçalho */
+    color: white;
+    padding: 15px 20px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Caixa de Mensagens */
+#chat-box {
+    flex-grow: 1; /* Ocupa todo o espaço disponível */
+    padding: 15px;
+    overflow-y: auto; /* Rolagem quando o conteúdo exceder */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaço entre as mensagens */
+    scrollbar-width: thin; /* Para Firefox */
+    scrollbar-color: #6a0dad #3a3a5a; /* Roxo para o scroll, fundo do scroll */
+}
+
+/* Estilo da barra de rolagem para Webkit (Chrome, Safari) */
+#chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat-box::-webkit-scrollbar-track {
+    background: #3a3a5a; /* Fundo da barra de rolagem */
+    border-radius: 10px;
+}
+
+#chat-box::-webkit-scrollbar-thumb {
+    background-color: #6a0dad; /* Cor do "polegar" da barra de rolagem */
+    border-radius: 10px;
+    border: 2px solid #3a3a5a;
+}
+
+/* Estilo das Mensagens */
+.message {
+    max-width: 80%; /* Limita a largura da bolha de mensagem */
+    padding: 10px 15px;
+    border-radius: 18px;
+    word-wrap: break-word; /* Quebra palavras longas */
+}
+
+.user-message {
+    background-color: #4a148c; /* Roxo mais claro para mensagens do usuário */
+    color: white;
+    align-self: flex-end; /* Alinha à direita */
+    border-bottom-right-radius: 5px; /* Deixa uma pontinha para simular bolha */
+}
+
+.bot-message {
+    background-color: #3a3a5a; /* Cinza arroxeado para mensagens do bot */
+    color: #e0e0e0;
+    align-self: flex-start; /* Alinha à esquerda */
+    border-bottom-left-radius: 5px; /* Deixa uma pontinha para simular bolha */
+}
+
+/* Estilo para o loading */
+.loading-message {
+    background-color: #4a4a6a; /* Cor diferente para o loading */
+    color: #e0e0e0;
+    align-self: flex-start;
+    padding: 10px 15px;
+    border-radius: 18px;
+    border-bottom-left-radius: 5px;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* Área de Input */
+.chatbot-input-area {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #4a4a6a; /* Linha divisória sutil */
+}
+
+#user-input {
+    flex-grow: 1; /* Ocupa a maior parte do espaço */
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background-color: #3a3a5a; /* Fundo do input */
+    color: #e0e0e0;
+    font-size: 1em;
+    outline: none; /* Remove a borda de foco */
+    margin-right: 10px;
+}
+
+#user-input::placeholder {
+    color: #b0b0b0; /* Cor do placeholder */
+}
+
+/* Estilo para input desabilitado */
+#user-input:disabled {
+    background-color: #2a2a4a;
+    cursor: not-allowed;
+}
+
+button {
+    background-color: #6a0dad; /* Roxo para o botão */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+button:hover:not(:disabled) { /* Não aplica hover se o botão estiver desabilitado */
+    background-color: #8a2be2; /* Roxo um pouco mais claro ao passar o mouse */
+    transform: translateY(-2px); /* Efeito de elevação */
+}
+
+/* Estilo para botão desabilitado */
+button:disabled {
+    background-color: #4a4a6a; /* Cor mais escura para desabilitado */
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* NOVO: Estilo para o botão de microfone */
+#microphone-button {
+    background-color: #4CAF50; /* Verde para o microfone */
+    margin-left: 10px;
+    padding: 12px 15px; /* Ajuste o padding para um ícone */
+    border-radius: 50%; /* Torna o botão redondo */
+    width: 50px; /* Largura fixa para ser redondo */
+    height: 50px; /* Altura fixa para ser redondo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em; /* Tamanho do ícone */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#microphone-button.recording {
+    background-color: #F44336; /* Vermelho quando gravando */
+    animation: pulse 1s infinite alternate; /* Animação de pulso */
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+    }
+    to {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(244, 67, 54, 0);
+    }
+}
+
+/* Ícone do microfone (usando Font Awesome ou similar, ou SVG inline) */
+.microphone-icon {
+    color: white;
+    /* Se estiver usando Font Awesome, adicione a classe 'fas fa-microphone' */
+}
+
+/* Estilo para o botão de reproduzir áudio */
+.play-audio-button {
+    background-color: #007bff; /* Azul para o botão de play */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.play-audio-button:hover {
+    background-color: #0056b3;
+}
+
+.message.bot-message .play-audio-button {
+    margin-top: 5px; /* Espaço entre o texto e o botão de play */
+}
+
+/* Container para o texto e o botão de play na mensagem do bot */
+.bot-message-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Alinha o texto à esquerda e o botão à direita */
+    width: 100%;
+}
+
