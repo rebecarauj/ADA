@@ -1,0 +1,85 @@
+site_name: ADA – Chatbot SENAC
+site_author: Rebeca Gama
+repo_url: https://github.com/renatoteodoro/ADA
+repo_name: renatoteodoro/ADA
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: deep purple
+      accent: indigo
+    - scheme: slate
+      primary: deep purple
+      accent: indigo
+  language: pt-BR
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - content.code.copy
+    - content.tabs.link
+    - toc.integrate
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+
+nav:
+  - Introdução:
+      - Visão Geral: index.md
+      - Objetivos do Projeto: objetivos.md
+      - Arquitetura Geral: arquitetura.md
+      - Fluxo de Funcionamento: fluxo.md
+
+  - Instalação e Setup:
+      - Requisitos do Sistema: instalacao/requisitos.md
+      - Instalação do Ambiente: instalacao/instalacao.md
+      - Estrutura de Pastas: instalacao/estrutura.md
+      - Variáveis de Ambiente: instalacao/variaveis.md
+      - Como Rodar Localmente: instalacao/rodar_local.md
+
+  - Backend (Django):
+      - Models: backend/models.md
+      - Views: backend/views.md
+      - URLs: backend/urls.md
+      - Admin: backend/admin.md
+      - Templates: backend/templates.md
+
+  - Chatbot:
+      - Lógica do Bot: chatbot/logica.md
+      - Base de Conhecimento: chatbot/base_conhecimento.md
+      - Exemplos de Diálogos: chatbot/exemplos.md
+
+  - API do Chatbot:
+      - Endpoints: api/endpoints.md
+      - Payloads e Respostas: api/payloads.md
+      - Exemplos de Requisições: api/exemplos_requisicoes.md
+
+  - Desenvolvimento:
+      - Como Contribuir: desenvolvimento/contribuir.md
+      - Testes: desenvolvimento/testes.md
+      - Padrões de Código: desenvolvimento/padroes.md
+
+  - Deploy:
+      - Deploy Local: deploy/local.md
+      - Deploy em Produção: deploy/producao.md
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - footnotes
+  - tables
+  - def_list
+  - pymdownx.highlight
+  - pymdownx.tabbed
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.magiclink
+  - pymdownx.snippets
+  - pymdownx.emoji
+  - pymdownx.keys
+
+plugins:
+  - search
+
